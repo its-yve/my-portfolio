@@ -1,5 +1,29 @@
 import { useState, useEffect } from "react";
 
+// MUI Icons
+import MenuIcon from "@mui/icons-material/Menu";
+import CloseIcon from "@mui/icons-material/Close";
+import EmailIcon from "@mui/icons-material/Email";
+import LinkedInIcon from "@mui/icons-material/LinkedIn";
+import GitHubIcon from "@mui/icons-material/GitHub";
+import LocationOnIcon from "@mui/icons-material/LocationOn";
+import EmojiEventsIcon from "@mui/icons-material/EmojiEvents";
+import BoltIcon from "@mui/icons-material/Bolt";
+import VerifiedIcon from "@mui/icons-material/Verified";
+import NotificationsActiveIcon from "@mui/icons-material/NotificationsActive";
+import SmartToyIcon from "@mui/icons-material/SmartToy";
+import LocalParkingIcon from "@mui/icons-material/LocalParking";
+import LibraryBooksIcon from "@mui/icons-material/LibraryBooks";
+import SensorsIcon from "@mui/icons-material/Sensors";
+import DeleteSweepIcon from "@mui/icons-material/DeleteSweep";
+import CodeIcon from "@mui/icons-material/Code";
+import MemoryIcon from "@mui/icons-material/Memory";
+import BrushIcon from "@mui/icons-material/Brush";
+import CloudIcon from "@mui/icons-material/Cloud";
+import WorkspacePremiumIcon from "@mui/icons-material/WorkspacePremium";
+import ArrowOutwardIcon from "@mui/icons-material/ArrowOutward";
+import SchoolIcon from "@mui/icons-material/School";
+
 const NAV_LINKS = ["About", "Skills", "Projects", "Experience", "Contact"];
 
 const SKILLS = {
@@ -9,6 +33,13 @@ const SKILLS = {
   "Cloud & Tools": ["Firebase", "Microsoft Azure", "Google Maps API", "Flask"],
 };
 
+const SKILL_ICONS = {
+  "Programming & Web": <CodeIcon sx={{ color: "#FF6B1A", fontSize: 22 }} />,
+  "Embedded & IoT": <MemoryIcon sx={{ color: "#FF6B1A", fontSize: 22 }} />,
+  "UI/UX Design": <BrushIcon sx={{ color: "#FF6B1A", fontSize: 22 }} />,
+  "Cloud & Tools": <CloudIcon sx={{ color: "#FF6B1A", fontSize: 22 }} />,
+};
+
 const PROJECTS = [
   {
     title: "PEAS App",
@@ -16,7 +47,7 @@ const PROJECTS = [
     description:
       "Mobile app for emergency alerts and real-time GPS tracking. Integrated IoT hardware for live GPS data transmission using Firebase Realtime Database and Google Maps API.",
     tags: ["Android Studio", "Firebase", "Google Maps API", "IoT", "Figma"],
-    icon: "🚨",
+    icon: <NotificationsActiveIcon sx={{ fontSize: 32, color: "#FF6B1A" }} />,
   },
   {
     title: "PoliSync AI",
@@ -24,7 +55,7 @@ const PROJECTS = [
     description:
       "AI-powered tool that compares policy documents using text extraction and semantic embeddings. Features PDF upload, chat interaction, and similarity scoring.",
     tags: ["Flask", "PyMuPDF", "NLTK", "SentenceTransformer", "Figma"],
-    icon: "🤖",
+    icon: <SmartToyIcon sx={{ fontSize: 32, color: "#FF6B1A" }} />,
   },
   {
     title: "PARK BOT",
@@ -32,7 +63,7 @@ const PROJECTS = [
     description:
       "Automated parking-slot system with remote reservation and lock/unlock features. Built real-time control interface with cloud storage via Microsoft Azure.",
     tags: ["React", "Microsoft Azure", "Figma", "IoT"],
-    icon: "🅿️",
+    icon: <LocalParkingIcon sx={{ fontSize: 32, color: "#FF6B1A" }} />,
   },
   {
     title: "Library Thesis Access System",
@@ -40,15 +71,15 @@ const PROJECTS = [
     description:
       "Web-based system for accessing and managing thesis records with user authentication and searchable archives.",
     tags: ["HTML", "PHP", "SQL"],
-    icon: "📚",
+    icon: <LibraryBooksIcon sx={{ fontSize: 32, color: "#FF6B1A" }} />,
   },
   {
-    title: "Automated Self-Sustaining Plant System",
+    title: "Automated Plant System",
     subtitle: "IoT Prototype",
     description:
       "IoT prototype for automated plant watering and monitoring using Arduino and Raspberry Pi for hardware and sensor control.",
     tags: ["Arduino", "Raspberry Pi", "IoT"],
-    icon: "🌱",
+    icon: <SensorsIcon sx={{ fontSize: 32, color: "#FF6B1A" }} />,
   },
   {
     title: "Automated Trash Sorter",
@@ -56,7 +87,7 @@ const PROJECTS = [
     description:
       "Sensor-based prototype that classifies waste in real-time using embedded systems programming for automated sorting.",
     tags: ["Embedded Systems", "Sensors", "Arduino"],
-    icon: "♻️",
+    icon: <DeleteSweepIcon sx={{ fontSize: 32, color: "#FF6B1A" }} />,
   },
 ];
 
@@ -94,8 +125,16 @@ const EXPERIENCE = [
 ];
 
 const CERTS = [
-  { label: "AWS Academy Graduate", sub: "Cloud Foundation Training Badge" },
-  { label: "CompTIA IT Fundamentals (ITF+)", sub: "Exam Passer, 2024" },
+  {
+    label: "AWS Academy Graduate",
+    sub: "Cloud Foundation Training Badge",
+    icon: <EmojiEventsIcon sx={{ fontSize: 28, color: "#FF6B1A" }} />,
+  },
+  {
+    label: "CompTIA IT Fundamentals (ITF+)",
+    sub: "Exam Passer, 2024",
+    icon: <VerifiedIcon sx={{ fontSize: 28, color: "#FF6B1A" }} />,
+  },
 ];
 
 export default function App() {
@@ -115,7 +154,6 @@ export default function App() {
 
   return (
     <div style={styles.root}>
-      {/* Background grid */}
       <div style={styles.grid} />
 
       {/* NAV */}
@@ -128,26 +166,21 @@ export default function App() {
             <button
               key={n}
               onClick={() => scrollTo(n)}
-              style={{
-                ...styles.navBtn,
-                ...(active === n ? styles.navBtnActive : {}),
-              }}
+              style={{ ...styles.navBtn, ...(active === n ? styles.navBtnActive : {}) }}
             >
               {n}
             </button>
           ))}
         </div>
         <button style={styles.hamburger} onClick={() => setMenuOpen(!menuOpen)}>
-          {menuOpen ? "✕" : "☰"}
+          {menuOpen ? <CloseIcon sx={{ fontSize: 22 }} /> : <MenuIcon sx={{ fontSize: 22 }} />}
         </button>
       </nav>
 
       {menuOpen && (
         <div style={styles.mobileMenu}>
           {NAV_LINKS.map((n) => (
-            <button key={n} onClick={() => scrollTo(n)} style={styles.mobileMenuItem}>
-              {n}
-            </button>
+            <button key={n} onClick={() => scrollTo(n)} style={styles.mobileMenuItem}>{n}</button>
           ))}
         </div>
       )}
@@ -165,23 +198,25 @@ export default function App() {
             through code, design, and embedded systems — from AI-powered tools to IoT prototypes.
           </p>
           <div style={styles.heroBadges}>
-            <span style={styles.badge}>José Rizal University</span>
+            <span style={styles.badge}>
+              <SchoolIcon sx={{ fontSize: 13, marginRight: "4px", verticalAlign: "middle" }} />
+              José Rizal University
+            </span>
             <span style={styles.badge}>BS Computer Engineering '26</span>
           </div>
           <div style={styles.heroActions}>
             <a href="mailto:fionayvonne.canas@gmail.com" style={styles.btnPrimary}>
+              <EmailIcon sx={{ fontSize: 17, marginRight: "6px" }} />
               Get In Touch
             </a>
-            <a
-              href="https://linkedin.com/in/fiona-cañas"
-              target="_blank"
-              rel="noreferrer"
-              style={styles.btnSecondary}
-            >
-              LinkedIn ↗
+            <a href="https://linkedin.com/in/fiona-cañas" target="_blank" rel="noreferrer" style={styles.btnSecondary}>
+              <LinkedInIcon sx={{ fontSize: 17, marginRight: "6px" }} />
+              LinkedIn
+              <ArrowOutwardIcon sx={{ fontSize: 13, marginLeft: "4px" }} />
             </a>
           </div>
         </div>
+
         <div style={styles.heroRight}>
           <div style={styles.avatarRing}>
             <img
@@ -196,14 +231,14 @@ export default function App() {
             <div style={styles.avatarFallback}>FY</div>
           </div>
           <div style={styles.floatCard1}>
-            <span style={{ fontSize: 18 }}>🏆</span>
+            <EmojiEventsIcon sx={{ fontSize: 22, color: "#FF6B1A" }} />
             <div>
               <div style={{ fontWeight: 700, fontSize: 12, color: "#FF6B1A" }}>AWS Certified</div>
               <div style={{ fontSize: 11, color: "#888" }}>Cloud Foundation</div>
             </div>
           </div>
           <div style={styles.floatCard2}>
-            <span style={{ fontSize: 18 }}>⚡</span>
+            <BoltIcon sx={{ fontSize: 22, color: "#FF6B1A" }} />
             <div>
               <div style={{ fontWeight: 700, fontSize: 12, color: "#FF6B1A" }}>CompTIA ITF+</div>
               <div style={{ fontSize: 11, color: "#888" }}>Exam Passer</div>
@@ -219,7 +254,10 @@ export default function App() {
         <div style={styles.skillsGrid}>
           {Object.entries(SKILLS).map(([cat, items]) => (
             <div key={cat} style={styles.skillCard}>
-              <h3 style={styles.skillCat}>{cat}</h3>
+              <div style={{ display: "flex", alignItems: "center", gap: 10, marginBottom: 16 }}>
+                {SKILL_ICONS[cat]}
+                <h3 style={{ ...styles.skillCat, marginBottom: 0 }}>{cat}</h3>
+              </div>
               <div style={styles.skillTags}>
                 {items.map((s) => (
                   <span key={s} style={styles.skillTag}>{s}</span>
@@ -263,13 +301,15 @@ export default function App() {
           ))}
         </div>
 
-        {/* Certs */}
         <div style={{ marginTop: 48 }}>
-          <h3 style={{ ...styles.skillCat, marginBottom: 20 }}>Certifications</h3>
+          <div style={{ display: "flex", alignItems: "center", gap: 10, marginBottom: 20 }}>
+            <WorkspacePremiumIcon sx={{ color: "#FF6B1A", fontSize: 18 }} />
+            <h3 style={{ ...styles.skillCat, marginBottom: 0 }}>Certifications</h3>
+          </div>
           <div style={{ display: "flex", gap: 16, flexWrap: "wrap" }}>
             {CERTS.map((c, i) => (
               <div key={i} style={styles.certCard}>
-                <div style={{ color: "#FF6B1A", fontSize: 22, marginBottom: 8 }}>🎖️</div>
+                <div style={{ marginBottom: 10 }}>{c.icon}</div>
                 <div style={{ fontWeight: 700, fontSize: 14, color: "#fff", marginBottom: 4 }}>{c.label}</div>
                 <div style={{ fontSize: 12, color: "#888" }}>{c.sub}</div>
               </div>
@@ -287,22 +327,22 @@ export default function App() {
         </p>
         <div style={styles.contactCards}>
           <a href="mailto:fionayvonne.canas@gmail.com" style={styles.contactCard}>
-            <span style={{ fontSize: 28, marginBottom: 8 }}>✉️</span>
+            <EmailIcon sx={{ fontSize: 32, color: "#FF6B1A", marginBottom: "8px" }} />
             <span style={{ fontWeight: 700, color: "#FF6B1A", fontSize: 13 }}>Email</span>
             <span style={{ color: "#ccc", fontSize: 12 }}>fionayvonne.canas@gmail.com</span>
           </a>
           <a href="https://linkedin.com/in/fiona-cañas" target="_blank" rel="noreferrer" style={styles.contactCard}>
-            <span style={{ fontSize: 28, marginBottom: 8 }}>💼</span>
+            <LinkedInIcon sx={{ fontSize: 32, color: "#FF6B1A", marginBottom: "8px" }} />
             <span style={{ fontWeight: 700, color: "#FF6B1A", fontSize: 13 }}>LinkedIn</span>
             <span style={{ color: "#ccc", fontSize: 12 }}>linkedin.com/in/fiona-cañas</span>
           </a>
           <a href="https://github.com/its-yve" target="_blank" rel="noreferrer" style={styles.contactCard}>
-            <span style={{ fontSize: 28, marginBottom: 8 }}>🐙</span>
+            <GitHubIcon sx={{ fontSize: 32, color: "#FF6B1A", marginBottom: "8px" }} />
             <span style={{ fontWeight: 700, color: "#FF6B1A", fontSize: 13 }}>GitHub</span>
             <span style={{ color: "#ccc", fontSize: 12 }}>github.com/its-yve</span>
           </a>
           <div style={{ ...styles.contactCard, cursor: "default" }}>
-            <span style={{ fontSize: 28, marginBottom: 8 }}>📍</span>
+            <LocationOnIcon sx={{ fontSize: 32, color: "#FF6B1A", marginBottom: "8px" }} />
             <span style={{ fontWeight: 700, color: "#FF6B1A", fontSize: 13 }}>Location</span>
             <span style={{ color: "#ccc", fontSize: 12 }}>Taguig City, Philippines</span>
           </div>
@@ -335,10 +375,7 @@ function ProjectCard({ project }) {
   const [hovered, setHovered] = useState(false);
   return (
     <div
-      style={{
-        ...styles.projectCard,
-        ...(hovered ? styles.projectCardHover : {}),
-      }}
+      style={{ ...styles.projectCard, ...(hovered ? styles.projectCardHover : {}) }}
       onMouseEnter={() => setHovered(true)}
       onMouseLeave={() => setHovered(false)}
     >
@@ -374,9 +411,7 @@ const styles = {
   },
   nav: {
     position: "fixed",
-    top: 0,
-    left: 0,
-    right: 0,
+    top: 0, left: 0, right: 0,
     zIndex: 100,
     display: "flex",
     alignItems: "center",
@@ -393,10 +428,7 @@ const styles = {
     letterSpacing: "-0.02em",
     color: "#fff",
   },
-  navLinks: {
-    display: "flex",
-    gap: 4,
-  },
+  navLinks: { display: "flex", gap: 4 },
   navBtn: {
     background: "none",
     border: "none",
@@ -417,14 +449,14 @@ const styles = {
     background: "none",
     border: "none",
     color: "#fff",
-    fontSize: 20,
     cursor: "pointer",
+    alignItems: "center",
+    justifyContent: "center",
+    padding: 4,
   },
   mobileMenu: {
     position: "fixed",
-    top: 64,
-    left: 0,
-    right: 0,
+    top: 64, left: 0, right: 0,
     background: "#111",
     zIndex: 99,
     display: "flex",
@@ -452,10 +484,7 @@ const styles = {
     minHeight: "100vh",
     flexWrap: "wrap",
   },
-  heroLeft: {
-    flex: "1 1 400px",
-    maxWidth: 560,
-  },
+  heroLeft: { flex: "1 1 400px", maxWidth: 560 },
   heroTag: {
     color: "#FF6B1A",
     fontSize: 13,
@@ -471,9 +500,7 @@ const styles = {
     letterSpacing: "-0.03em",
     marginBottom: 24,
   },
-  heroNameOrange: {
-    color: "#FF6B1A",
-  },
+  heroNameOrange: { color: "#FF6B1A" },
   heroBio: {
     color: "#999",
     fontSize: 17,
@@ -494,6 +521,8 @@ const styles = {
     borderRadius: 20,
     fontSize: 12,
     fontWeight: 600,
+    display: "inline-flex",
+    alignItems: "center",
   },
   heroActions: {
     display: "flex",
@@ -508,8 +537,9 @@ const styles = {
     fontWeight: 700,
     fontSize: 15,
     textDecoration: "none",
+    display: "inline-flex",
+    alignItems: "center",
     transition: "all 0.2s",
-    display: "inline-block",
   },
   btnSecondary: {
     background: "transparent",
@@ -520,8 +550,9 @@ const styles = {
     fontWeight: 600,
     fontSize: 15,
     textDecoration: "none",
+    display: "inline-flex",
+    alignItems: "center",
     transition: "all 0.2s",
-    display: "inline-block",
   },
   heroRight: {
     flex: "1 1 300px",
@@ -544,11 +575,7 @@ const styles = {
     position: "relative",
     boxShadow: "0 0 60px rgba(255,107,26,0.15)",
   },
-  avatar: {
-    width: "100%",
-    height: "100%",
-    objectFit: "cover",
-  },
+  avatar: { width: "100%", height: "100%", objectFit: "cover" },
   avatarFallback: {
     display: "none",
     width: "100%",
@@ -562,8 +589,7 @@ const styles = {
   },
   floatCard1: {
     position: "absolute",
-    top: 20,
-    right: 0,
+    top: 20, right: 0,
     background: "#161616",
     border: "1px solid rgba(255,107,26,0.2)",
     borderRadius: 12,
@@ -575,8 +601,7 @@ const styles = {
   },
   floatCard2: {
     position: "absolute",
-    bottom: 20,
-    left: 0,
+    bottom: 20, left: 0,
     background: "#161616",
     border: "1px solid rgba(255,107,26,0.2)",
     borderRadius: 12,
@@ -620,11 +645,7 @@ const styles = {
     textTransform: "uppercase",
     marginBottom: 16,
   },
-  skillTags: {
-    display: "flex",
-    flexWrap: "wrap",
-    gap: 8,
-  },
+  skillTags: { display: "flex", flexWrap: "wrap", gap: 8 },
   skillTag: {
     background: "rgba(255,255,255,0.05)",
     border: "1px solid rgba(255,255,255,0.08)",
@@ -651,33 +672,11 @@ const styles = {
     transform: "translateY(-4px)",
     boxShadow: "0 20px 60px rgba(255,107,26,0.08)",
   },
-  projectIcon: {
-    fontSize: 32,
-    marginBottom: 16,
-  },
-  projectTitle: {
-    fontSize: 18,
-    fontWeight: 800,
-    color: "#fff",
-    marginBottom: 4,
-  },
-  projectSub: {
-    fontSize: 13,
-    color: "#FF6B1A",
-    fontWeight: 600,
-    marginBottom: 12,
-  },
-  projectDesc: {
-    color: "#888",
-    fontSize: 14,
-    lineHeight: 1.65,
-    marginBottom: 20,
-  },
-  projectTags: {
-    display: "flex",
-    flexWrap: "wrap",
-    gap: 6,
-  },
+  projectIcon: { marginBottom: 16, display: "flex" },
+  projectTitle: { fontSize: 18, fontWeight: 800, color: "#fff", marginBottom: 4 },
+  projectSub: { fontSize: 13, color: "#FF6B1A", fontWeight: 600, marginBottom: 12 },
+  projectDesc: { color: "#888", fontSize: 14, lineHeight: 1.65, marginBottom: 20 },
+  projectTags: { display: "flex", flexWrap: "wrap", gap: 6 },
   projectTag: {
     background: "rgba(255,107,26,0.08)",
     color: "#FF6B1A",
@@ -694,15 +693,11 @@ const styles = {
     flexDirection: "column",
     gap: 40,
   },
-  timelineItem: {
-    position: "relative",
-  },
+  timelineItem: { position: "relative" },
   timelineDot: {
     position: "absolute",
-    left: -41,
-    top: 4,
-    width: 12,
-    height: 12,
+    left: -41, top: 4,
+    width: 12, height: 12,
     borderRadius: "50%",
     background: "#FF6B1A",
     border: "2px solid #0A0A0A",
@@ -717,27 +712,10 @@ const styles = {
     textTransform: "uppercase",
     marginBottom: 6,
   },
-  timelineRole: {
-    fontSize: 18,
-    fontWeight: 800,
-    color: "#fff",
-    marginBottom: 4,
-  },
-  timelineOrg: {
-    color: "#666",
-    fontSize: 14,
-    marginBottom: 14,
-  },
-  timelineBullets: {
-    paddingLeft: 18,
-    margin: 0,
-  },
-  timelineBullet: {
-    color: "#888",
-    fontSize: 14,
-    lineHeight: 1.7,
-    marginBottom: 6,
-  },
+  timelineRole: { fontSize: 18, fontWeight: 800, color: "#fff", marginBottom: 4 },
+  timelineOrg: { color: "#666", fontSize: 14, marginBottom: 14 },
+  timelineBullets: { paddingLeft: 18, margin: 0 },
+  timelineBullet: { color: "#888", fontSize: 14, lineHeight: 1.7, marginBottom: 6 },
   certCard: {
     background: "#111",
     border: "1px solid rgba(255,107,26,0.15)",
@@ -747,9 +725,7 @@ const styles = {
     flexDirection: "column",
     minWidth: 200,
   },
-  contactSection: {
-    textAlign: "center",
-  },
+  contactSection: { textAlign: "center" },
   contactCards: {
     display: "flex",
     gap: 16,
